@@ -36,7 +36,6 @@ mongoose
     )
     .catch((error) => console.log(`${error} did not connect`));
 
-mongoose.set("useFindAndModify", false);
 app.use(bodyPARSER.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use('/images', express.static('images'))
