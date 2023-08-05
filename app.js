@@ -22,7 +22,21 @@ const https = require('https')
 /// https is used to get data from a external sserver
 app.set('view engine', 'ejs')
 
-mongoose.connect('mongodb://localhost:27017/secret', { useNewUrlParser: true })
+const CONNECTION_URL =
+    "mongodb+srv://ashuji478:Acenitrr@cluster0.fwuy52p.mongodb.net/backDB";
+
+const PORT = process.env.PORT || 5003;
+
+mongoose
+    .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() =>
+        app.listen(PORT, () =>
+            console.log(`Server Running on Port: http://localhost:${PORT}`)
+        )
+    )
+    .catch((error) => console.log(`${error} did not connect`));
+
+mongoose.set("useFindAndModify", false);
 app.use(bodyPARSER.urlencoded({ extended: true }))
 app.use(express.static('public'))
 app.use('/images', express.static('images'))
